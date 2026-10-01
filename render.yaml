@@ -1,0 +1,66 @@
+services:
+  - type: web
+    name: formation-inscription
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /inscription
+    envVars:
+      - key: APP_NAME
+        value: "Formation"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        value: ""              # à laisser vide au 1er déploiement, voir note ci-dessous
+      - key: APP_URL
+        value: "https://formation-inscription.onrender.com"   # à corriger après coup si Render choisit un autre nom
+      - key: LOG_CHANNEL
+        value: stderr
+
+      # --- Base de données (Neon) ---
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: "ep-billowing-frost-b4cczj0t-pooler.c-6.us-east-2.aws.neon.tech"
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_DATABASE
+        value: "neondb"
+      - key: DB_USERNAME
+        value: "neondb_owner"
+      - key: DB_PASSWORD
+        value: "npg_Ce8tzLnaA5rv"
+      - key: DB_SSLMODE
+        value: require
+
+      # --- Contenu et tarifs ---
+      - key: FORMATION_ORGANISME
+        value: "Formation Ghislain"   # à corriger si vous avez un autre nom d'organisme/marque
+      - key: FORMATION_CONTACT
+        value: "WhatsApp : +226 05 90 61 75"
+      - key: FORMATION_DELAI_VERIFICATION
+        value: "sous 48 heures"
+      - key: FORMATION_MESSAGE_WHATSAPP
+        value: "Bonjour :prenom, votre inscription à « :titre » est confirmée. Rappel : :dates, :lieu. À très bientôt !"
+      - key: PAIEMENT_ORANGE_NUMERO
+        value: "+226 05 90 61 75"
+      - key: PAIEMENT_MOOV_NUMERO
+        value: "+226 52 95 84 51"
+      - key: PAIEMENT_TITULAIRE
+        value: "somda constent ou poda saa-gou ghislain"
+
+      # --- Accès administrateur ---
+      - key: ADMIN_USER
+        value: "admin"
+      - key: ADMIN_PASSWORD_HASH
+        value: '$2y$12$smONMRjfTPgJ4BBKTtpY7epmum7EntLPpiK/THNE42iM.8fZTeEk.'
+
+      # --- Emails ---
+      - key: MAIL_MAILER
+        value: log
+      - key: MAIL_FROM_ADDRESS
+        value: "formation@formation-inscription.onrender.com"
+      - key: MAIL_FROM_NAME
+        value: "Formation"
