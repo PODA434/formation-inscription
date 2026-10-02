@@ -1,6 +1,6 @@
 # Image de déploiement pour Render (ou tout hébergeur Docker).
 # PHP seul en serveur (artisan serve) : suffisant pour un petit site, pas besoin de Nginx séparé.
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 # Dépendances système + extensions PHP nécessaires à Laravel + PostgreSQL
 RUN apk add --no-cache \
