@@ -2,17 +2,21 @@
 set -e
 
 # Render ne fournit APP_KEY qu'une fois : on la génère à la première exécution si elle manque.
+# --show affiche la clé sans tenter de l'écrire dans un fichier .env (qui n'existe pas ici).
 if [ -z "$APP_KEY" ]; then
-  echo "APP_KEY absente : génération (à copier dans les variables d'environnement Render pour la garder)."
-  php artisan key:generate --force
+  APP_KEY=$(php artisan key:generate --show --no-ansi | tail -n1 | tr -d '\r\n')
+  echo "=============================================================="
+  echo "APP_KEY générée : $APP_KEY"
+  echo "Copiez-la dans Environment -> APP_KEY sur Render, puis Save Changes,"
+  echo "pour qu'elle reste stable d'un redémarrage à l'autre."
+  echo "=============================================================="
+  export APP_KEY
 fi
 
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Migre la base à chaque démarrage. Sans danger : les migrations déjà appliquées sont ignorées.
-# Pour désactiver (ex. pendant un débogage), mettre RUN_MIGRATIONS=false dans les variables Render.
 if [ "$RUN_MIGRATIONS" != "false" ]; then
   echo "Application des migrations..."
   php artisan migrate --force
