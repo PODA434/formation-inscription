@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'titre'       => env('FORMATION_TITRE', 'Titre de votre formation'),
-    'description' => env('FORMATION_DESCRIPTION', 'Décrivez en une ou deux phrases ce que les participants sauront faire à la fin.'),
-    'dates'       => env('FORMATION_DATES', 'Dates à préciser'),
-    'lieu'        => env('FORMATION_LIEU', 'Lieu à préciser'),
-    'contact'     => env('FORMATION_CONTACT', ''),   // WhatsApp / email affiché en cas de problème
+    'titre'       => env('FORMATION_TITRE', 'Formation pluridisciplinaire en informatique et multimédia'),
+    'description' => env('FORMATION_DESCRIPTION', ' A la fin de la formation, les participants seront capables de : créer des sites web, gérer des bases de données, concevoir des affiches publicitaires, et utiliser l’intelligence artificielle avec les meilleurs prompts pour améliorer leur productivité. une attestation sera délivrée à chaque participant ayant suivi la formation et un suivi sera assuré pendant un moi.'),
+    'dates'       => env('FORMATION_DATES', 'Debut novembre'),
+    'lieu'        => env('FORMATION_LIEU', 'secteur 22 ,bobodioulasso'),
+    'contact'     => env('FORMATION_CONTACT', '+226 05-90-61-75 ,podag808@gmail.com'),   // WhatsApp / email affiché en cas de problème
 
     'devise'      => 'XOF',
 
